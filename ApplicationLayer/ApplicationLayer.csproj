@@ -28,4 +28,8 @@
 	  <ProjectReference Include="..\DomainLayer\DomainLayer.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Features\Validations\Fleets\" />
+	</ItemGroup>
+
 </Project>

@@ -42,6 +42,10 @@ public class UserAccount : BaseEntityModel, IAuditableEntity
 
     public ICollection<UserProfile> UserProfiles { get; set; } = [];
 
+    public ICollection<Courier> Couriers { get; set; } = [];
+
+    public ICollection<Fleet> Fleets { get; set; } = [];
+
     public ICollection<RefreshToken> RefreshTokens { get; set; } = [];
 
     public ICollection<UserRole> UserRoles { get; set; } = [];

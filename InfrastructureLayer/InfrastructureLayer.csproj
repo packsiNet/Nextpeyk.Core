@@ -16,4 +16,8 @@
 	  <ProjectReference Include="..\DomainLayer\DomainLayer.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="BusinessLogic\Fleets\" />
+	</ItemGroup>
+
 </Project>
