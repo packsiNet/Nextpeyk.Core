@@ -50,7 +50,7 @@ public class FleetApplicationServices(IUnitOfWork unitOfWork,
 
     public Task<Result> GetParcelsAsync()
     {
-
+        return null;
     }
 
     public Task<Result> GetArchiveParcelsAsync()
