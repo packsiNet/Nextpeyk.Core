@@ -1,4 +1,4 @@
-﻿using DomainLayer.Entities;
+using DomainLayer.Entities;
 using InfrastructureLayer.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -13,6 +13,7 @@ public class CityConfiguration : BaseEntityConfiguration<City>
 
         builder.Property(current => current.Name).IsRequired();
         builder.Property(current => current.Code).IsRequired();
+        builder.Property(c => c.CenterPoint).HasColumnType("geography");
         builder.Property(c => c.Boundary).HasColumnType("geography");
 
         builder.HasOne(current => current.Province).WithMany(current => current.Cities).HasForeignKey(current => current.ProvinceId);

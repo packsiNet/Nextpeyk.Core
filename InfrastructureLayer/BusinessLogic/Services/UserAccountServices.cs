@@ -171,7 +171,6 @@ public class UserAccountServices(IRepository<UserAccount> userAccountRepository,
             var userInfo = new UserInfoDto
             {
                 UserAccountId = user.Id,
-                DisplayName = user.UserProfiles.FirstOrDefault()?.DisplayName,
                 FirstName = user.UserProfiles.FirstOrDefault()?.FirstName,
                 LastName = user.UserProfiles.FirstOrDefault()?.LastName,
             };

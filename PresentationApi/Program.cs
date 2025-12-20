@@ -29,10 +29,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI(options =>
     {
-        options.SwaggerEndpoint("/swagger/Identity/swagger.json", "API Identity v1");
-        options.SwaggerEndpoint("/swagger/Administrator/swagger.json", "API Administrator v1");
-        options.SwaggerEndpoint("/swagger/Managers/swagger.json", "API Managers v1");
-        options.SwaggerEndpoint("/swagger/Users/swagger.json", "API Users v1");
+        options.SwaggerEndpoint("/swagger/Admin/swagger.json", "API Admin");
+        options.SwaggerEndpoint("/swagger/Curier/swagger.json", "API Curier");
+        options.SwaggerEndpoint("/swagger/Mobile/swagger.json", "Mobile Application");
+        options.SwaggerEndpoint("/swagger/ExternalService/swagger.json", "API Extenal Service");
 
         // تنظیم صفحه پیش‌فرض
         options.RoutePrefix = string.Empty; // باز شدن در root: http://localhost:5000/

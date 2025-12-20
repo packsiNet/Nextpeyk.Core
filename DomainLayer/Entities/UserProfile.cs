@@ -10,7 +10,7 @@ public class UserProfile : BaseEntityModel, IAuditableEntity
 
     public string LastName { get; set; }
 
-    public string DisplayName { get; set; }
+    public string NationalCode { get; set; }
 
     public string Address { get; set; }
 

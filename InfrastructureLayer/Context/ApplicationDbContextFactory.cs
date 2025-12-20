@@ -8,7 +8,7 @@ namespace InfrastructureLayer.Context
     {
         public ApplicationDbContext CreateDbContext(string[] args)
         {
-            var basePath = Path.Combine(Directory.GetCurrentDirectory(), "..", "PresentationApp");
+            var basePath = Path.Combine(Directory.GetCurrentDirectory(), "..", "PresentationApi");
 
             var configuration = new ConfigurationBuilder()
                 .SetBasePath(basePath)
@@ -18,7 +18,7 @@ namespace InfrastructureLayer.Context
             var connectionString = configuration.GetConnectionString("DefaultConnection");
 
             var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
-            optionsBuilder.UseSqlServer(connectionString);
+            optionsBuilder.UseSqlServer(connectionString, x => x.UseNetTopologySuite());
 
             return new ApplicationDbContext(optionsBuilder.Options);
         }

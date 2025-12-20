@@ -1,4 +1,4 @@
-﻿using ApplicationLayer.Common.Behaviors;
+using ApplicationLayer.Common.Behaviors;
 using ApplicationLayer.Features.Validations;
 using ApplicationLayer.Interfaces;
 using ApplicationLayer.Mapping.UserAccounts;
@@ -30,11 +30,10 @@ public static class DependencyInjection
     {
         services.RegisterService(configuration);
 
-
         var connectionString = configuration.GetConnectionString("DefaultConnection");
 
         services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseSqlServer(connectionString));
+            options.UseSqlServer(connectionString, x => x.UseNetTopologySuite()));
 
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
         services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -132,10 +131,10 @@ public static class DependencyInjection
                 }
             });
 
-            options.SwaggerDoc("Identity", new OpenApiInfo { Title = "API Identity", Version = "v1" });
-            options.SwaggerDoc("Administrator", new OpenApiInfo { Title = "API Administrator", Version = "v1" });
-            options.SwaggerDoc("Managers", new OpenApiInfo { Title = "API Managers", Version = "v1" });
-            options.SwaggerDoc("Users", new OpenApiInfo { Title = "API Users", Version = "v1" });
+            options.SwaggerDoc("Admin", new OpenApiInfo { Title = "API Admin", Version = "v1" });
+            options.SwaggerDoc("Curier", new OpenApiInfo { Title = "API Curier", Version = "v1" });
+            options.SwaggerDoc("Mobile", new OpenApiInfo { Title = "API Mobile", Version = "v1" });
+            options.SwaggerDoc("ExternalService", new OpenApiInfo { Title = "API ExternalService", Version = "v1" });
         });
     }
 
@@ -228,9 +227,9 @@ public static class DependencyInjection
         services.AddMediatR(m =>
         {
             m.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
-            // Register handlers from PresentationApp assembly for domain events
+            // Register handlers from PresentationApi assembly for domain events
             var presentationAssembly = AppDomain.CurrentDomain.GetAssemblies()
-                .FirstOrDefault(a => a.GetName().Name == "PresentationApp");
+                .FirstOrDefault(a => a.GetName().Name == "PresentationApi");
             if (presentationAssembly != null)
             {
                 m.RegisterServicesFromAssembly(presentationAssembly);
