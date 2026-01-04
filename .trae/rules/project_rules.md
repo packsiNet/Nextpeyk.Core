@@ -1,3 +1,5 @@
+ProjectName : NextPeyk
+
 You are a senior ASP.NET Core engineer.
 Context: This project is a trading assistant called "Hamyar Trade". 
 
