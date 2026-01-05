@@ -273,3 +273,154 @@ Use IMediator to communicate with ApplicationLayer
 Add Swagger documentation for the new feature
 
 in all class Used Primary Constractor
+
+
+* Project Details : 
+
+Project Overview – NextPick Logistics Platform
+
+NextPick is a logistics platform designed for parcel transportation and delivery management.
+The system consists of three main applications:
+
+Admin Panel – system administration and master data management
+
+Logistics Panel – courier and fleet operational management
+
+Driver Mobile Application – used by fleet drivers for delivery execution and tracking
+
+User Roles
+
+The system supports the following roles:
+
+Admin – full system access and management
+
+Courier – organizations responsible for handling parcels and managing fleets
+
+Fleet – drivers or vehicles executing deliveries
+
+Role-based access control is implemented using JWT authentication.
+
+Architecture & Entity Design Rules
+
+The project follows Clean Architecture principles.
+
+All entities inherit from a common base model:
+
+Primary keys are automatically generated
+
+Auditing fields are handled via a shared base entity
+
+Entities MUST NOT be registered via DbSet<TEntity> in ApplicationDbContext
+
+Every entity MUST have a dedicated Entity Framework Core Configuration class
+
+Database tables are created only through configuration classes
+
+Entity Structure Example
+Entity Example
+public class Province : BaseEntityModel, IAuditableEntity
+{
+    public string Name { get; set; }
+    public string Code { get; set; }
+    public ICollection<City> Cities { get; set; } = [];
+}
+
+Configuration Example
+public class ProvinceConfiguration : BaseEntityConfiguration<Province>
+{
+    public override void Configure(EntityTypeBuilder<Province> builder)
+    {
+        base.Configure(builder);
+
+        builder.Property(x => x.Name).IsRequired();
+        builder.Property(x => x.Code).IsRequired();
+    }
+}
+
+
+Rule:
+Every new model must include a corresponding configuration class that defines schema rules, constraints, and relationships.
+
+Core Domain Tables
+External Access
+
+ApiKeyStore
+Stores API keys for external applications accessing system endpoints.
+
+Geography
+
+Province
+
+City
+
+Contracts & Couriers
+
+Contract – contract details between couriers and fleets
+
+Courier – organizations managing parcel operations
+
+CourierBoxSize – many-to-many relation between couriers and supported box sizes
+
+Fleet Management
+
+Fleet – fleet/driver information
+
+FleetType – type of vehicle
+
+GPSFleet – real-time fleet location tracking
+
+Notifications
+
+Notification – messages sent to users
+
+Parcel & Delivery Flow
+
+Parcel
+Core parcel data registered by Admin for a Courier (organization-level info)
+
+ParcelCourier
+Parcel with extended sender and receiver details
+
+ParcelAssign
+Assignment of a parcel to a fleet
+
+ParcelTracking
+Tracks parcel status changes over time
+
+ParcelTrackingAttachment
+Attachments related to each tracking step (e.g. images, documents)
+
+Authentication & Authorization Tables
+
+The following tables support JWT-based authentication and refresh tokens:
+
+UserAccount
+UserProfile
+Role
+UserRole
+RefreshToken
+Setting
+
+Key Constraints & Guidelines for AI Behavior
+
+Always generate Entity + Configuration together
+
+Never add DbSet<TEntity> to ApplicationDbContext
+
+Respect role-based access rules (Admin, Courier, Fleet)
+
+Follow EF Core Fluent API patterns
+
+Assume JWT authentication is already implemented
+
+Prefer extensibility and clean separation of concerns
+
+If you want, I can also:
+
+Convert this into a System Prompt JSON
+
+Write a Clean Architecture AI instruction block
+
+Generate Entity + Configuration templates automatically
+
+Align it with CQRS / MediatR conventions

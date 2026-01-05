@@ -17,6 +17,6 @@ namespace DomainLayer.Entities
 
         public Province Province { get; set; }
 
-        //public virtual ICollection<Courier> Couriers { get; set; } = [];
+        public virtual ICollection<Courier> Couriers { get; set; } = [];
     }
 }
